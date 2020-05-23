@@ -6,6 +6,7 @@ import id.ac.unhas.todolist.db.AppDatabase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import java.util.*
 
 class ToDoListRepo (application: Application){
     private val toDoListDao: ToDoListDao?
@@ -17,7 +18,7 @@ class ToDoListRepo (application: Application){
         lists = toDoListDao?.getToDoList()
     }
 
-    fun getList(): LiveData<List<ToDoList>>?{
+    fun getLists(): LiveData<List<ToDoList>>?{
         return lists
     }
 
@@ -30,6 +31,12 @@ class ToDoListRepo (application: Application){
     fun insertNote(note: ToDoList) = runBlocking {
         this.launch(Dispatchers.IO){
             toDoListDao?.insertNote(note)
+        }
+    }
+
+    fun insertDueDate(dueDate: Date) = runBlocking {
+        this.launch(Dispatchers.IO) {
+            toDoListDao?.insertDueDate(dueDate)
         }
     }
 

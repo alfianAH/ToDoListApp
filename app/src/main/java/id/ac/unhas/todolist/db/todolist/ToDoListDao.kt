@@ -2,6 +2,7 @@ package id.ac.unhas.todolist.db.todolist
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import java.util.*
 
 @Dao
 interface ToDoListDao {
@@ -13,6 +14,9 @@ interface ToDoListDao {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertNote(note: ToDoList)
+
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun insertDueDate(dueDate: Date)
 
     @Delete
     suspend fun deleteList(list: ToDoList)
