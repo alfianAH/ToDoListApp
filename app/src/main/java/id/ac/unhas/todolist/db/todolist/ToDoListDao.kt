@@ -2,7 +2,6 @@ package id.ac.unhas.todolist.db.todolist
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import java.util.*
 
 @Dao
 interface ToDoListDao {

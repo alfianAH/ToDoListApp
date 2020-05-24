@@ -1,26 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".UpdateListActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
         android:orientation="vertical"
-        android:padding="16dp">
+        android:padding="20dp">
 
         <TextView
-            android:id="@+id/title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="25sp"
-            android:text="@string/title"
-            android:textStyle="bold"
-            android:textAlignment="center"/>
-
-        <TextView
-            android:id="@+id/list_title"
+            android:id="@+id/title_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/title_list"
@@ -32,7 +24,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textCapSentences|textAutoCorrect"
-            android:hint="@string/title_list"/>
+            android:hint="@string/title_list" />
+
+        <CheckBox
+            android:id="@+id/checkbox_is_finished"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/task_finished"
+            android:layout_marginBottom="15dp"/>
 
         <TextView
             android:id="@+id/due_date"
@@ -46,7 +45,8 @@
             android:id="@+id/due_date_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="date"/>
+            android:inputType="date"
+            android:layout_marginBottom="15dp"/>
 
         <TextView
             android:id="@+id/list_note"
@@ -60,6 +60,32 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textCapSentences|textAutoCorrect"
-            android:hint="@string/additional_note" />
+            android:hint="@string/additional_note"
+            android:layout_marginBottom="15dp"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal">
+
+            <Button
+                android:id="@+id/btn_update"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="15dp"
+                android:text="@string/update"
+                android:background="@color/colorPrimary" />
+
+            <Button
+                android:id="@+id/btn_cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="15dp"
+                android:text="@string/cancel"
+                android:background="@color/colorPrimary"/>
+        </LinearLayout>
+
     </LinearLayout>
 </RelativeLayout>

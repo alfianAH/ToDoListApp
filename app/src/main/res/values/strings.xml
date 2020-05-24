@@ -4,6 +4,10 @@
     <string name="title_list">Title</string>
     <string name="additional_note">Additional Note</string>
     <string name="due_date">Due Date</string>
-    <string name="title">Add A Task</string>
+    <string name="add_title">Add a Task</string>
     <string name="save">Save</string>
+    <string name="update_title">Update a Task</string>
+    <string name="update">Update</string>
+    <string name="cancel">Cancel</string>
+    <string name="task_finished">Task finished?</string>
 </resources>
