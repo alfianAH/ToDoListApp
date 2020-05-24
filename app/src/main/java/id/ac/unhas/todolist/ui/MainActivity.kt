@@ -1,18 +1,16 @@
-package id.ac.unhas.todolist
+package id.ac.unhas.todolist.ui
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.EditText
-import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import id.ac.unhas.todolist.R
 import id.ac.unhas.todolist.db.todolist.ToDoList
-import id.ac.unhas.todolist.ui.ToDoListAdapter
-import id.ac.unhas.todolist.ui.ToDoListViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -50,7 +48,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun addList(){
-
+        val addIntent = Intent(this, AddListActivity::class.java)
+        startActivity(addIntent)
     }
 
     private fun showAlertMenu(toDoList: ToDoList){
@@ -71,6 +70,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun updateList(toDoList: ToDoList){
-
+        val addIntent = Intent(this, UpdateListActivity::class.java)
+        startActivity(addIntent)
     }
 }

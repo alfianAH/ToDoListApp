@@ -1,8 +1,9 @@
-package id.ac.unhas.todolist
+package id.ac.unhas.todolist.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
+import id.ac.unhas.todolist.R
 
 class UpdateListActivity : AppCompatActivity() {
 
@@ -10,7 +11,7 @@ class UpdateListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_update_list)
         if(supportActionBar != null){
-            supportActionBar?.title = "Add a Task"
+            supportActionBar?.title = "Update a Task"
         }
         supportActionBar?.setDisplayHomeAsUpEnabled(true) // Back Button
     }

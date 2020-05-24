@@ -7,15 +7,21 @@ import java.util.*
 
 @Entity(tableName = "todolist")
 data class ToDoList (
-    @PrimaryKey(autoGenerate = false)
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "id")
+    val id: Int? = null,
+
     @ColumnInfo(name = "created_date")
-    val createdDate: Date? = null,
+    val createdDate: String? = null,
 
     @ColumnInfo(name = "updated_date")
-    val updatedDate: Date? = null,
+    val updatedDate: String? = null,
 
     @ColumnInfo(name = "due_date")
-    val dueDate: Date? = null,
+    val dueDate: String? = null,
+
+    @ColumnInfo(name = "due_hour")
+    val dueHour: String? = null,
 
     @ColumnInfo(name = "title")
     val title: String,

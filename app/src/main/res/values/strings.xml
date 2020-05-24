@@ -10,4 +10,8 @@
     <string name="update">Update</string>
     <string name="cancel">Cancel</string>
     <string name="task_finished">Task finished?</string>
+    <string name="date_not_set">Date not set</string>
+    <string name="time_not_set">Time not set (all day)</string>
+    <string name="due_time">Due Time</string>
+    <string name="comma">,\u0020</string>
 </resources>
