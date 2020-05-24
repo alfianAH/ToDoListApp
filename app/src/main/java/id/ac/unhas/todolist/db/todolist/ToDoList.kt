@@ -21,5 +21,8 @@ data class ToDoList (
     val title: String,
 
     @ColumnInfo(name = "note")
-    val note: String
+    val note: String,
+
+    @ColumnInfo(name = "is_finished")
+    val isFinished: Boolean? = null
 )
