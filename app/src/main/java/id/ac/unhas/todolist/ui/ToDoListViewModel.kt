@@ -5,7 +5,6 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import id.ac.unhas.todolist.db.todolist.ToDoList
 import id.ac.unhas.todolist.db.todolist.ToDoListRepo
-import java.util.*
 
 class ToDoListViewModel (application: Application): AndroidViewModel(application){
     private var toDoListRepo = ToDoListRepo(application)
@@ -15,23 +14,15 @@ class ToDoListViewModel (application: Application): AndroidViewModel(application
         return lists
     }
 
-    fun insertTitle(title: ToDoList){
-        toDoListRepo.insertTitle(title)
-    }
-
-    fun insertNote(note: ToDoList){
-        toDoListRepo.insertNote(note)
-    }
-
-    fun insertDueDate(dueDate: Date){
-        toDoListRepo.insertDueDate(dueDate)
+    fun insertList(list: ToDoList){
+        toDoListRepo.insertList(list)
     }
 
     fun deleteList(list: ToDoList){
-        toDoListRepo.delete(list)
+        toDoListRepo.deleteList(list)
     }
 
     fun updateList(list: ToDoList){
-        toDoListRepo.update(list)
+        toDoListRepo.updateList(list)
     }
 }

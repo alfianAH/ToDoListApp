@@ -10,13 +10,7 @@ interface ToDoListDao {
     fun getToDoList(): LiveData<List<ToDoList>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insertTitle(title: ToDoList)
-
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insertNote(note: ToDoList)
-
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insertDueDate(dueDate: Date)
+    suspend fun insertList(list: ToDoList)
 
     @Delete
     suspend fun deleteList(list: ToDoList)
