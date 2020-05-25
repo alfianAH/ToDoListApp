@@ -2,7 +2,6 @@ package id.ac.unhas.todolist.ui
 
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
@@ -106,6 +105,6 @@ class AddListActivity : AppCompatActivity() {
             )
         )
 
-        startActivity(Intent(applicationContext, MainActivity::class.java))
+        finish()
     }
 }
