@@ -9,6 +9,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import id.ac.unhas.todolist.R
 import id.ac.unhas.todolist.db.todolist.ToDoList
 import kotlinx.android.synthetic.main.activity_main.*
@@ -16,10 +17,13 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity() {
     private lateinit var toDoListViewModel: ToDoListViewModel
     private lateinit var toDoListAdapter: ToDoListAdapter
+    private lateinit var floatingActionButton: FloatingActionButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        floatingActionButton = findViewById(R.id.fab)
 
         listRV.layoutManager = LinearLayoutManager(this)
         toDoListAdapter = ToDoListAdapter(this){
@@ -32,6 +36,10 @@ class MainActivity : AppCompatActivity() {
         toDoListViewModel.getLists()?.observe(this, Observer {
             toDoListAdapter.setLists(it)
         })
+
+        floatingActionButton.setOnClickListener{
+            addList()
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -42,7 +50,8 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
-            R.id.addMenu -> addList()
+            R.id.search_list -> searchList()
+            R.id.sort_list -> sortList()
         }
         return super.onOptionsItemSelected(item)
     }
@@ -82,7 +91,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun updateList(toDoList: ToDoList){
-
         val addIntent = Intent(this, UpdateListActivity::class.java)
             .putExtra("EXTRA_LIST", toDoList)
             .putExtra(UpdateListActivity.EXTRA_TITLE_UPDATE, toDoList.title)
@@ -91,5 +99,13 @@ class MainActivity : AppCompatActivity() {
             .putExtra(UpdateListActivity.EXTRA_NOTE_UPDATE, toDoList.note)
 
         startActivity(addIntent)
+    }
+
+    private fun searchList(){
+
+    }
+
+    private fun sortList(){
+
     }
 }

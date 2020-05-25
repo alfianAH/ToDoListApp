@@ -38,15 +38,15 @@ class AddListActivity : AppCompatActivity() {
         btnSave = findViewById(R.id.btn_save)
         toDoListViewModel = ViewModelProvider(this).get(ToDoListViewModel::class.java)
 
-        editTextDate.setOnClickListener{ view: View ->
+        editTextDate.setOnClickListener{
             setDueDate()
         }
 
-        editTextTime.setOnClickListener { view: View ->
+        editTextTime.setOnClickListener {
             setDueTime()
         }
 
-        btnSave.setOnClickListener{view: View ->
+        btnSave.setOnClickListener{
             saveList()
         }
     }

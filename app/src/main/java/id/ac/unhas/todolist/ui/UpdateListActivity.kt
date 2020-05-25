@@ -50,19 +50,19 @@ class UpdateListActivity : AppCompatActivity() {
 
         getExtra()
 
-        editTextDate.setOnClickListener{ view: View ->
+        editTextDate.setOnClickListener{
             setDueDate()
         }
 
-        editTextTime.setOnClickListener { view: View ->
+        editTextTime.setOnClickListener {
             setDueTime()
         }
 
-        btnUpdate.setOnClickListener{view: View ->
+        btnUpdate.setOnClickListener{
             updateList(toDoList)
         }
 
-        btnCancel.setOnClickListener{view: View ->
+        btnCancel.setOnClickListener{
             finish()
         }
     }
