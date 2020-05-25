@@ -62,7 +62,19 @@ class MainActivity : AppCompatActivity() {
                     updateList(toDoList)
                 }
                 1 -> {
-                    toDoListViewModel.deleteList(toDoList)
+                    val alert = AlertDialog.Builder(this)
+                    alert.setTitle("Delete task?")
+                    alert.setMessage("Are you sure?")
+                    alert.setPositiveButton("Yes"){dialog, _ ->
+                        toDoListViewModel.deleteList(toDoList)
+                        dialog.dismiss()
+                    }
+
+                    alert.setNegativeButton("No"){dialog, _ ->
+                        dialog.dismiss()
+                    }
+
+                    alert.show()
                 }
             }
         }
@@ -70,7 +82,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun updateList(toDoList: ToDoList){
+
         val addIntent = Intent(this, UpdateListActivity::class.java)
+            .putExtra("EXTRA_LIST", toDoList)
+            .putExtra(UpdateListActivity.EXTRA_TITLE_UPDATE, toDoList.title)
+            .putExtra(UpdateListActivity.EXTRA_DATE_UPDATE, toDoList.dueDate)
+            .putExtra(UpdateListActivity.EXTRA_TIME_UPDATE, toDoList.dueHour)
+            .putExtra(UpdateListActivity.EXTRA_NOTE_UPDATE, toDoList.note)
+
         startActivity(addIntent)
     }
 }

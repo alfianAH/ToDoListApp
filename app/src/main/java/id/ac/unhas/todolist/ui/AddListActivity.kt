@@ -19,7 +19,7 @@ class AddListActivity : AppCompatActivity() {
     private lateinit var editTextDate: EditText
     private lateinit var editTextNote: EditText
     private lateinit var editTextTime: EditText
-    private lateinit var saveBtn: Button
+    private lateinit var btnSave: Button
     private lateinit var toDoListViewModel: ToDoListViewModel
     private var calendar = Calendar.getInstance()
 
@@ -35,7 +35,7 @@ class AddListActivity : AppCompatActivity() {
         editTextDate = findViewById(R.id.due_date_content)
         editTextNote = findViewById(R.id.note_content)
         editTextTime = findViewById(R.id.due_time_content)
-        saveBtn = findViewById(R.id.btn_save)
+        btnSave = findViewById(R.id.btn_save)
         toDoListViewModel = ViewModelProvider(this).get(ToDoListViewModel::class.java)
 
         editTextDate.setOnClickListener{ view: View ->
@@ -46,7 +46,7 @@ class AddListActivity : AppCompatActivity() {
             setDueTime()
         }
 
-        saveBtn.setOnClickListener{view: View ->
+        btnSave.setOnClickListener{view: View ->
             saveList()
         }
     }
@@ -91,16 +91,16 @@ class AddListActivity : AppCompatActivity() {
 //            .ofPattern("yyyy-MM-dd HH:mm:ss.SSSSSS")
 //            .withZone(ZoneOffset.UTC)
 //            .format(Instant.now())
+        val title = editTextTitle.text.toString().trim()
         val dueDate = editTextDate.text.toString().trim()
         val dueHour = editTextTime.text.toString().trim()
-        val title = editTextTitle.text.toString().trim()
         val note = editTextNote.text.toString().trim()
 
         toDoListViewModel.insertList(
             ToDoList(
+                title = title,
                 dueDate = dueDate,
                 dueHour = dueHour,
-                title = title,
                 note = note
             )
         )

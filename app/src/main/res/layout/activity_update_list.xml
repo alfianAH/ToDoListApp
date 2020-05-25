@@ -46,7 +46,21 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="date"
-            android:layout_marginBottom="15dp"/>
+            android:hint="@string/date_not_set"
+            android:clickable="true"
+            android:longClickable="false"
+            android:focusable="false"/>
+
+        <EditText
+            android:id="@+id/due_time_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="time"
+            android:layout_marginBottom="15dp"
+            android:hint="@string/time_not_set"
+            android:clickable="true"
+            android:longClickable="false"
+            android:focusable="false"/>
 
         <TextView
             android:id="@+id/list_note"

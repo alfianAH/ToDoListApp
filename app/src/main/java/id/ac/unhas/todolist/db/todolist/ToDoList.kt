@@ -1,9 +1,12 @@
 package id.ac.unhas.todolist.db.todolist
 
+import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 @Entity(tableName = "todolist")
 data class ToDoList (
     @PrimaryKey(autoGenerate = true)
@@ -11,23 +14,23 @@ data class ToDoList (
     val id: Int? = null,
 
     @ColumnInfo(name = "created_date")
-    val createdDate: String? = null,
+    var createdDate: String? = null,
 
     @ColumnInfo(name = "updated_date")
-    val updatedDate: String? = null,
+    var updatedDate: String? = null,
 
     @ColumnInfo(name = "due_date")
-    val dueDate: String? = null,
+    var dueDate: String? = null,
 
     @ColumnInfo(name = "due_hour")
-    val dueHour: String? = null,
+    var dueHour: String? = null,
 
     @ColumnInfo(name = "title")
-    val title: String,
+    var title: String,
 
     @ColumnInfo(name = "note")
-    val note: String,
+    var note: String,
 
     @ColumnInfo(name = "is_finished")
-    val isFinished: Boolean? = null
-)
+    var isFinished: Boolean? = null
+) : Parcelable
