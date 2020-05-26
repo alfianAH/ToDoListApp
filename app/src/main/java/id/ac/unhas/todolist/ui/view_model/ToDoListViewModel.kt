@@ -25,4 +25,8 @@ class ToDoListViewModel (application: Application): AndroidViewModel(application
     fun updateList(list: ToDoList){
         toDoListRepo.updateList(list)
     }
+
+    fun searchResult(title: String): LiveData<List<ToDoList>>?{
+        return toDoListRepo.searchResult(title)
+    }
 }

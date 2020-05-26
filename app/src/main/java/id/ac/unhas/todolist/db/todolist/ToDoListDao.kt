@@ -16,4 +16,7 @@ interface ToDoListDao {
 
     @Update
     suspend fun updateList(list: ToDoList)
+
+    @Query("SELECT * FROM todolist WHERE title LIKE :title")
+    fun searchResult(title: String): LiveData<List<ToDoList>>
 }

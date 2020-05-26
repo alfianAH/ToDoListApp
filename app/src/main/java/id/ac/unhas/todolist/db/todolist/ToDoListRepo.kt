@@ -39,4 +39,7 @@ class ToDoListRepo (application: Application){
         }
     }
 
+    fun searchResult(title: String): LiveData<List<ToDoList>>?{
+        return toDoListDao?.searchResult(title)
+    }
 }
