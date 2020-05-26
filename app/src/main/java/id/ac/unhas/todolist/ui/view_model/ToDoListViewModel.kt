@@ -1,4 +1,4 @@
-package id.ac.unhas.todolist.ui
+package id.ac.unhas.todolist.ui.view_model
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel

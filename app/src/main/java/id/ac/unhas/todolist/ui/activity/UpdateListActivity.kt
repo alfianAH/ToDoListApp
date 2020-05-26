@@ -1,16 +1,16 @@
-package id.ac.unhas.todolist.ui
+package id.ac.unhas.todolist.ui.activity
 
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
-import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import androidx.lifecycle.ViewModelProvider
 import id.ac.unhas.todolist.R
 import id.ac.unhas.todolist.db.todolist.ToDoList
+import id.ac.unhas.todolist.ui.view_model.ToDoListViewModel
 import java.text.SimpleDateFormat
 import java.util.*
 

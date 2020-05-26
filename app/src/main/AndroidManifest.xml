@@ -9,12 +9,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.UpdateListActivity"></activity>
-        <activity android:name=".ui.AddListActivity" />
+        <activity android:name=".ui.activity.UpdateListActivity"></activity>
+        <activity android:name=".ui.activity.AddListActivity" />
         <activity android:name=".ToDoListActivity" />
         <activity android:name=".todolist" />
         <activity android:name=".main_menu" />
-        <activity android:name=".ui.MainActivity">
+        <activity android:name=".ui.activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -1,4 +1,4 @@
-package id.ac.unhas.todolist.ui
+package id.ac.unhas.todolist.ui.activity
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -12,6 +12,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import id.ac.unhas.todolist.R
 import id.ac.unhas.todolist.db.todolist.ToDoList
+import id.ac.unhas.todolist.ui.adapter.ToDoListAdapter
+import id.ac.unhas.todolist.ui.view_model.ToDoListViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -26,9 +28,10 @@ class MainActivity : AppCompatActivity() {
         floatingActionButton = findViewById(R.id.fab)
 
         listRV.layoutManager = LinearLayoutManager(this)
-        toDoListAdapter = ToDoListAdapter(this){
-            toDoList, i -> showAlertMenu(toDoList)
-        }
+        toDoListAdapter =
+            ToDoListAdapter(this) { toDoList, i ->
+                showAlertMenu(toDoList)
+            }
         listRV.adapter = toDoListAdapter
 
         toDoListViewModel = ViewModelProvider(this).get(ToDoListViewModel::class.java)
