@@ -3,7 +3,6 @@ package id.ac.unhas.todolist.ui.activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AlertDialog
@@ -101,7 +100,47 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun sortList(){
+        val items = arrayOf("Sort by Due Date", "Sort by Created Date")
 
+        val builder = AlertDialog.Builder(this)
+        val alert = AlertDialog.Builder(this)
+        builder.setItems(items){dialog, which ->
+            when(which){
+                0 -> {
+                    alert.setTitle(items[which])
+                        .setPositiveButton("Ascending"){dialog, _ ->
+                            toDoListViewModel.sortByDueDateAscending()?.observe(this, Observer {
+                                toDoListAdapter.setLists(it)
+                            })
+                            dialog.dismiss()
+                        }
+                        .setNegativeButton("Descending"){dialog, _ ->
+                            toDoListViewModel.sortByDueDateDescending()?.observe(this, Observer {
+                                toDoListAdapter.setLists(it)
+                            })
+                            dialog.dismiss()
+                        }
+                        .show()
+                }
+                1 -> {
+                    alert.setTitle(items[which])
+                        .setPositiveButton("Ascending"){dialog, _ ->
+                            toDoListViewModel.sortByCreatedDateAscending()?.observe(this, Observer {
+                                toDoListAdapter.setLists(it)
+                            })
+                            dialog.dismiss()
+                        }
+                        .setNegativeButton("Descending"){dialog, _ ->
+                            toDoListViewModel.sortByCreatedDateDescending()?.observe(this, Observer {
+                                toDoListAdapter.setLists(it)
+                            })
+                            dialog.dismiss()
+                        }
+                        .show()
+                }
+            }
+        }
+        builder.show()
     }
 
     private fun showAlertMenu(toDoList: ToDoList){

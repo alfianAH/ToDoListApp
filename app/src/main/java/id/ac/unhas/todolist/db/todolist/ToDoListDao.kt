@@ -19,4 +19,16 @@ interface ToDoListDao {
 
     @Query("SELECT * FROM todolist WHERE title LIKE :title")
     fun searchResult(title: String): LiveData<List<ToDoList>>
+
+    @Query("SELECT * FROM todolist ORDER BY due_date ASC, due_hour ASC")
+    fun sortByDueDateAscending(): LiveData<List<ToDoList>>
+
+    @Query("SELECT * FROM todolist ORDER BY due_date DESC, due_hour DESC")
+    fun sortByDueDateDescending(): LiveData<List<ToDoList>>
+
+    @Query("SELECT * FROM todolist ORDER BY created_date ASC")
+    fun sortByCreatedDateAscending(): LiveData<List<ToDoList>>
+
+    @Query("SELECT * FROM todolist ORDER BY created_date DESC")
+    fun sortByCreatedDateDescending(): LiveData<List<ToDoList>>
 }
