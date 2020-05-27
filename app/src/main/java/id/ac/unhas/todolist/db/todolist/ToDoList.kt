@@ -14,10 +14,10 @@ data class ToDoList (
     val id: Int? = null,
 
     @ColumnInfo(name = "created_date")
-    var createdDate: String? = null,
+    var createdDate: Int? = null,
 
     @ColumnInfo(name = "updated_date")
-    var updatedDate: String? = null,
+    var updatedDate: Int? = null,
 
     @ColumnInfo(name = "due_date")
     var dueDate: String? = null,

@@ -12,6 +12,7 @@ import id.ac.unhas.todolist.R
 import id.ac.unhas.todolist.db.todolist.ToDoList
 import id.ac.unhas.todolist.ui.view_model.ToDoListViewModel
 import java.text.SimpleDateFormat
+import java.time.ZonedDateTime
 import java.util.*
 
 class UpdateListActivity : AppCompatActivity() {
@@ -111,6 +112,11 @@ class UpdateListActivity : AppCompatActivity() {
     }
 
     private fun updateList(toDoList: ToDoList){
+        val current = ZonedDateTime.now()
+        val millis = current.toInstant().epochSecond
+        val updatedDate = millis.toInt()
+
+        toDoList.updatedDate = updatedDate
         toDoList.title = editTextTitle.text.toString().trim()
         toDoList.dueDate = editTextDate.text.toString().trim()
         toDoList.dueHour = editTextTime.text.toString().trim()
