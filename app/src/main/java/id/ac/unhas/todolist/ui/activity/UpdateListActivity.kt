@@ -10,6 +10,7 @@ import android.widget.EditText
 import androidx.lifecycle.ViewModelProvider
 import id.ac.unhas.todolist.R
 import id.ac.unhas.todolist.db.todolist.ToDoList
+import id.ac.unhas.todolist.ui.Converter
 import id.ac.unhas.todolist.ui.view_model.ToDoListViewModel
 import java.text.SimpleDateFormat
 import java.time.ZonedDateTime
@@ -88,14 +89,14 @@ class UpdateListActivity : AppCompatActivity() {
         val year = calendar.get(Calendar.YEAR)
 
         // Date picker dialog
-        val datePicker = DatePickerDialog(
-            this,
-            DatePickerDialog.OnDateSetListener{
-                    view, year, month, date ->
-                editTextDate.setText("" + date + "-" + (month+1) + "-" + year)
-            }, year, month, date)
+        val dateListener = DatePickerDialog.OnDateSetListener{ view, year, month, date ->
+            calendar.set(Calendar.YEAR, year)
+            calendar.set(Calendar.MONTH, month)
+            calendar.set(Calendar.DATE, date)
+            editTextDate.setText(SimpleDateFormat("EEE, MMM dd, yyyy").format(calendar.time))
+        }
 
-        datePicker.show()
+        DatePickerDialog(this, dateListener, year, month, date).show()
     }
 
     private fun setDueTime(){
@@ -113,8 +114,7 @@ class UpdateListActivity : AppCompatActivity() {
 
     private fun updateList(toDoList: ToDoList){
         val current = ZonedDateTime.now()
-        val millis = current.toInstant().epochSecond
-        val updatedDate = millis.toInt()
+        val updatedDate = Converter.dateToInt(current)
 
         toDoList.updatedDate = updatedDate
         toDoList.title = editTextTitle.text.toString().trim()

@@ -10,6 +10,7 @@ import android.widget.EditText
 import androidx.lifecycle.ViewModelProvider
 import id.ac.unhas.todolist.R
 import id.ac.unhas.todolist.db.todolist.ToDoList
+import id.ac.unhas.todolist.ui.Converter
 import id.ac.unhas.todolist.ui.view_model.ToDoListViewModel
 import java.text.SimpleDateFormat
 import java.time.ZonedDateTime
@@ -64,14 +65,14 @@ class AddListActivity : AppCompatActivity() {
         val year = calendar.get(Calendar.YEAR)
 
         // Date picker dialog
-        val datePicker = DatePickerDialog(
-            this@AddListActivity,
-            DatePickerDialog.OnDateSetListener{
-                view, year, month, date ->
-                editTextDate.setText("" + date + "-" + (month+1) + "-" + year)
-            }, year, month, date)
+        val dateListener = DatePickerDialog.OnDateSetListener{ view, year, month, date ->
+            calendar.set(Calendar.YEAR, year)
+            calendar.set(Calendar.MONTH, month)
+            calendar.set(Calendar.DATE, date)
+            editTextDate.setText(SimpleDateFormat("EEE, MMM dd, yyyy").format(calendar.time))
+        }
 
-        datePicker.show()
+        DatePickerDialog(this, dateListener, year, month, date).show()
     }
 
     private fun setDueTime(){
@@ -89,9 +90,8 @@ class AddListActivity : AppCompatActivity() {
 
     private fun saveList(){
         val current = ZonedDateTime.now()
-        val millis = current.toInstant().epochSecond
+        val createdDate = Converter.dateToInt(current)
 
-        val createdDate = millis.toInt()
         val title = editTextTitle.text.toString().trim()
         val dueDate = editTextDate.text.toString().trim()
         val dueHour = editTextTime.text.toString().trim()
