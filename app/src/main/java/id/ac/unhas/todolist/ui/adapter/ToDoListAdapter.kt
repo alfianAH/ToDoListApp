@@ -42,9 +42,8 @@ class ToDoListAdapter(private val context: Context?, private val listener: (ToDo
 class ToDoListViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
     fun bindItem(context: Context, toDoList: ToDoList, listener: (ToDoList, Int) -> Unit){
         itemView.item_title_list.text = toDoList.title
-        itemView.item_due_date.text = toDoList.dueDate
+        itemView.item_due_time.text = "${toDoList.strDueDate}, ${toDoList.strDueHour}"
         itemView.item_note.text = toDoList.note
-        itemView.item_due_time.text = toDoList.dueHour
 
         itemView.setOnClickListener{
             listener(toDoList, layoutPosition)

@@ -137,8 +137,8 @@ class MainActivity : AppCompatActivity() {
         val addIntent = Intent(this, UpdateListActivity::class.java)
             .putExtra("EXTRA_LIST", toDoList)
             .putExtra(UpdateListActivity.EXTRA_TITLE_UPDATE, toDoList.title)
-            .putExtra(UpdateListActivity.EXTRA_DATE_UPDATE, toDoList.dueDate)
-            .putExtra(UpdateListActivity.EXTRA_TIME_UPDATE, toDoList.dueHour)
+            .putExtra(UpdateListActivity.EXTRA_DATE_UPDATE, toDoList.strDueDate)
+            .putExtra(UpdateListActivity.EXTRA_TIME_UPDATE, toDoList.strDueHour)
             .putExtra(UpdateListActivity.EXTRA_NOTE_UPDATE, toDoList.note)
 
         startActivity(addIntent)

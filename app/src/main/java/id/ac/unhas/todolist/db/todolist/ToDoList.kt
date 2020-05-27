@@ -20,10 +20,16 @@ data class ToDoList (
     var updatedDate: Int? = null,
 
     @ColumnInfo(name = "due_date")
-    var dueDate: String? = null,
+    var dueDate: Int? = null,
 
     @ColumnInfo(name = "due_hour")
-    var dueHour: String? = null,
+    var dueHour: Int? = null,
+
+    @ColumnInfo(name = "str_due_date")
+    var strDueDate: String? = null,
+
+    @ColumnInfo(name = "str_due_hour")
+    var strDueHour: String? = null,
 
     @ColumnInfo(name = "title")
     var title: String,

@@ -116,10 +116,18 @@ class UpdateListActivity : AppCompatActivity() {
         val current = ZonedDateTime.now()
         val updatedDate = Converter.dateToInt(current)
 
+        val strDueDate = editTextDate.text.toString().trim()
+        val dueDate = Converter.stringDateToInt(strDueDate)
+
+        val strDueHour = editTextTime.text.toString().trim()
+        val dueHour= Converter.stringTimeToInt(strDueHour)
+
         toDoList.updatedDate = updatedDate
         toDoList.title = editTextTitle.text.toString().trim()
-        toDoList.dueDate = editTextDate.text.toString().trim()
-        toDoList.dueHour = editTextTime.text.toString().trim()
+        toDoList.dueDate = dueDate
+        toDoList.dueHour = dueHour
+        toDoList.strDueDate = strDueDate
+        toDoList.strDueHour = strDueHour
         toDoList.note = editTextNote.text.toString().trim()
 
         toDoListViewModel.updateList(toDoList)

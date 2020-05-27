@@ -92,9 +92,13 @@ class AddListActivity : AppCompatActivity() {
         val current = ZonedDateTime.now()
         val createdDate = Converter.dateToInt(current)
 
+        val strDueDate = editTextDate.text.toString().trim()
+        val dueDate = Converter.stringDateToInt(strDueDate)
+
+        val strDueHour = editTextTime.text.toString().trim()
+        val dueHour= Converter.stringTimeToInt(strDueHour)
+
         val title = editTextTitle.text.toString().trim()
-        val dueDate = editTextDate.text.toString().trim()
-        val dueHour = editTextTime.text.toString().trim()
         val note = editTextNote.text.toString().trim()
 
         toDoListViewModel.insertList(
@@ -103,7 +107,10 @@ class AddListActivity : AppCompatActivity() {
                 title = title,
                 dueDate = dueDate,
                 dueHour = dueHour,
-                note = note
+                strDueDate = strDueDate,
+                strDueHour = strDueHour,
+                note = note,
+                isFinished = false
             )
         )
 
