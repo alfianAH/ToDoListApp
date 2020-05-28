@@ -5,7 +5,7 @@ import androidx.room.*
 
 @Dao
 interface ToDoListDao {
-    @Query("SELECT * FROM todolist")
+    @Query("SELECT * FROM todolist ORDER BY due_date ASC, due_hour ASC")
     fun getToDoList(): LiveData<List<ToDoList>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
@@ -19,9 +19,6 @@ interface ToDoListDao {
 
     @Query("SELECT * FROM todolist WHERE title LIKE :title")
     fun searchResult(title: String): LiveData<List<ToDoList>>
-
-    @Query("SELECT * FROM todolist ORDER BY due_date ASC, due_hour ASC")
-    fun sortByDueDateAscending(): LiveData<List<ToDoList>>
 
     @Query("SELECT * FROM todolist ORDER BY due_date DESC, due_hour DESC")
     fun sortByDueDateDescending(): LiveData<List<ToDoList>>

@@ -30,10 +30,6 @@ class ToDoListViewModel (application: Application): AndroidViewModel(application
         return toDoListRepo.searchResult(title)
     }
 
-    fun sortByDueDateAscending(): LiveData<List<ToDoList>>?{
-        return toDoListRepo.sortByDueDateAscending()
-    }
-
     fun sortByDueDateDescending(): LiveData<List<ToDoList>>?{
         return toDoListRepo.sortByDueDateDescending()
     }

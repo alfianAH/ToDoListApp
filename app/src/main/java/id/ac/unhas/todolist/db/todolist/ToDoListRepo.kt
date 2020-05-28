@@ -43,10 +43,6 @@ class ToDoListRepo (application: Application){
         return toDoListDao?.searchResult(title)
     }
 
-    fun sortByDueDateAscending(): LiveData<List<ToDoList>>?{
-        return toDoListDao?.sortByDueDateAscending()
-    }
-
     fun sortByDueDateDescending(): LiveData<List<ToDoList>>?{
         return toDoListDao?.sortByDueDateDescending()
     }

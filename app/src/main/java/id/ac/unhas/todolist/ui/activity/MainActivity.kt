@@ -63,12 +63,6 @@ class MainActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-//    private fun checkBoxIsFinished(checkBox: CheckBox, toDoList: ToDoList){
-//        if(checkBox.isChecked){
-//            toDoListViewModel.deleteList(toDoList)
-//        }
-//    }
-
     private fun addList(){
         val addIntent = Intent(this, AddListActivity::class.java)
         startActivity(addIntent)
@@ -119,7 +113,7 @@ class MainActivity : AppCompatActivity() {
                 0 -> {
                     alert.setTitle(items[which])
                         .setPositiveButton("Ascending"){dialog, _ ->
-                            toDoListViewModel.sortByDueDateAscending()?.observe(this, Observer {
+                            toDoListViewModel.getLists()?.observe(this, Observer {
                                 toDoListAdapter.setLists(it)
                             })
                             dialog.dismiss()
