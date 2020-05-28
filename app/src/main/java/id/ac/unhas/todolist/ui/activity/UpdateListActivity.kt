@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.Button
+import android.widget.CheckBox
 import android.widget.EditText
 import androidx.lifecycle.ViewModelProvider
 import id.ac.unhas.todolist.R
@@ -23,6 +24,8 @@ class UpdateListActivity : AppCompatActivity() {
     private lateinit var editTextNote: EditText
     private lateinit var btnUpdate: Button
     private lateinit var btnCancel: Button
+    private lateinit var chkBoxIsFinished: CheckBox
+
     private lateinit var toDoListViewModel: ToDoListViewModel
     private lateinit var toDoList: ToDoList
     private var calendar = Calendar.getInstance()
@@ -32,6 +35,7 @@ class UpdateListActivity : AppCompatActivity() {
         const val EXTRA_DATE_UPDATE = "date-month-year"
         const val EXTRA_TIME_UPDATE = "hour:minutes"
         const val EXTRA_NOTE_UPDATE = "NOTE"
+        const val EXTRA_IS_FINISHED_UPDATE = "false"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,6 +52,7 @@ class UpdateListActivity : AppCompatActivity() {
         editTextNote = findViewById(R.id.note_content)
         btnUpdate = findViewById(R.id.btn_update)
         btnCancel = findViewById(R.id.btn_cancel)
+        chkBoxIsFinished = findViewById(R.id.checkbox_is_finished)
         toDoListViewModel = ViewModelProvider(this).get(ToDoListViewModel::class.java)
 
         getExtra()
@@ -81,6 +86,7 @@ class UpdateListActivity : AppCompatActivity() {
         editTextDate.setText(intent.getStringExtra(EXTRA_DATE_UPDATE))
         editTextTime.setText(intent.getStringExtra(EXTRA_TIME_UPDATE))
         editTextNote.setText(intent.getStringExtra(EXTRA_NOTE_UPDATE))
+        chkBoxIsFinished.isChecked = intent.getBooleanExtra(EXTRA_IS_FINISHED_UPDATE, false)
     }
 
     private fun setDueDate(){
@@ -129,9 +135,10 @@ class UpdateListActivity : AppCompatActivity() {
         toDoList.strDueDate = strDueDate
         toDoList.strDueHour = strDueHour
         toDoList.note = editTextNote.text.toString().trim()
+        toDoList.isFinished = chkBoxIsFinished.isChecked
 
         toDoListViewModel.updateList(toDoList)
-
+        toDoListViewModel.deleteList(toDoList)
         finish()
     }
 }

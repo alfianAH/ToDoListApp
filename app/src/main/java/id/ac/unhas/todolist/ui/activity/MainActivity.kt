@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.CheckBox
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -20,6 +21,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var toDoListViewModel: ToDoListViewModel
     private lateinit var toDoListAdapter: ToDoListAdapter
     private lateinit var floatingActionButton: FloatingActionButton
+//    private lateinit var chkBoxIsFinished: CheckBox
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,6 +33,7 @@ class MainActivity : AppCompatActivity() {
         toDoListAdapter =
             ToDoListAdapter(this) { toDoList, i ->
                 showAlertMenu(toDoList)
+//                checkBoxIsFinished(chkBoxIsFinished, toDoList)
             }
         listRV.adapter = toDoListAdapter
 
@@ -59,6 +62,12 @@ class MainActivity : AppCompatActivity() {
         }
         return super.onOptionsItemSelected(item)
     }
+
+//    private fun checkBoxIsFinished(checkBox: CheckBox, toDoList: ToDoList){
+//        if(checkBox.isChecked){
+//            toDoListViewModel.deleteList(toDoList)
+//        }
+//    }
 
     private fun addList(){
         val addIntent = Intent(this, AddListActivity::class.java)
@@ -100,11 +109,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun sortList(){
-        val items = arrayOf("Sort by Due Date", "Sort by Created Date")
+        val items = arrayOf("Due Date", "SCreated Date")
 
         val builder = AlertDialog.Builder(this)
         val alert = AlertDialog.Builder(this)
-        builder.setItems(items){dialog, which ->
+        builder.setTitle("Sort by ...")
+            .setItems(items){dialog, which ->
             when(which){
                 0 -> {
                     alert.setTitle(items[which])
@@ -155,17 +165,15 @@ class MainActivity : AppCompatActivity() {
                 1 -> {
                     val alert = AlertDialog.Builder(this)
                     alert.setTitle("Delete task?")
-                    alert.setMessage("Are you sure?")
-                    alert.setPositiveButton("Yes"){dialog, _ ->
-                        toDoListViewModel.deleteList(toDoList)
-                        dialog.dismiss()
-                    }
-
-                    alert.setNegativeButton("No"){dialog, _ ->
-                        dialog.dismiss()
-                    }
-
-                    alert.show()
+                        .setMessage("Are you sure?")
+                        .setPositiveButton("Yes"){dialog, _ ->
+                            toDoListViewModel.deleteList(toDoList)
+                            dialog.dismiss()
+                        }
+                        .setNegativeButton("No"){dialog, _ ->
+                            dialog.dismiss()
+                        }
+                        .show()
                 }
             }
         }
@@ -179,6 +187,7 @@ class MainActivity : AppCompatActivity() {
             .putExtra(UpdateListActivity.EXTRA_DATE_UPDATE, toDoList.strDueDate)
             .putExtra(UpdateListActivity.EXTRA_TIME_UPDATE, toDoList.strDueHour)
             .putExtra(UpdateListActivity.EXTRA_NOTE_UPDATE, toDoList.note)
+            .putExtra(UpdateListActivity.EXTRA_IS_FINISHED_UPDATE, toDoList.isFinished)
 
         startActivity(addIntent)
     }
