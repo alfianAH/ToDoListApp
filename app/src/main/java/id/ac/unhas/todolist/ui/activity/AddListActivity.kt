@@ -13,7 +13,9 @@ import id.ac.unhas.todolist.db.todolist.ToDoList
 import id.ac.unhas.todolist.ui.Converter
 import id.ac.unhas.todolist.ui.view_model.ToDoListViewModel
 import java.text.SimpleDateFormat
+import java.time.ZoneId
 import java.time.ZonedDateTime
+import java.time.format.DateTimeFormatter
 import java.util.*
 
 class AddListActivity : AppCompatActivity() {
@@ -89,7 +91,10 @@ class AddListActivity : AppCompatActivity() {
     }
 
     private fun saveList(){
-        val current = ZonedDateTime.now()
+        val current = ZonedDateTime.now(ZoneId.of("+8"))
+        val formatter = DateTimeFormatter.ofPattern("EEE, MMM dd, yyyy, HH:mm:ss")
+
+        val strCreatedDate = current.format(formatter)
         val createdDate = Converter.dateToInt(current)
 
         val strDueDate = editTextDate.text.toString().trim()
@@ -104,6 +109,7 @@ class AddListActivity : AppCompatActivity() {
         toDoListViewModel.insertList(
             ToDoList(
                 createdDate = createdDate,
+                strCreatedDate = strCreatedDate,
                 title = title,
                 dueDate = dueDate,
                 dueHour = dueHour,

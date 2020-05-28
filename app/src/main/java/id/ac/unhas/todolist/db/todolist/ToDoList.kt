@@ -16,6 +16,9 @@ data class ToDoList (
     @ColumnInfo(name = "created_date")
     var createdDate: Int? = null,
 
+    @ColumnInfo(name = "str_created_date")
+    var strCreatedDate: String? = null,
+
     @ColumnInfo(name = "updated_date")
     var updatedDate: Int? = null,
 

@@ -138,7 +138,9 @@ class UpdateListActivity : AppCompatActivity() {
         toDoList.isFinished = chkBoxIsFinished.isChecked
 
         toDoListViewModel.updateList(toDoList)
-        toDoListViewModel.deleteList(toDoList)
+        if(chkBoxIsFinished.isChecked){
+            toDoListViewModel.deleteList(toDoList)
+        }
         finish()
     }
 }

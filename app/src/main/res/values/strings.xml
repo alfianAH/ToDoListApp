@@ -16,4 +16,9 @@
     <string name="comma">,\u0020</string>
     <string name="sort">Sort</string>
     <string name="search">Search</string>
+    <string name="created_date">Created date:\u0020</string>
+    <string name="created_date_content">Created date content</string>
+    <string name="due_time_content">Due time content</string>
+    <string name="due_time_u0020">Due time:\u0020</string>
+    <string name="additional_note_u0020">Additional note:\u0020</string>
 </resources>
