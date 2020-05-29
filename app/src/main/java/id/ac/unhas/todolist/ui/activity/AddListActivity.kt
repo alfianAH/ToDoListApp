@@ -97,11 +97,20 @@ class AddListActivity : AppCompatActivity() {
         val strCreatedDate = current.format(formatter)
         val createdDate = Converter.dateToInt(current)
 
-        val strDueDate = editTextDate.text.toString().trim()
-        val dueDate = Converter.stringDateToInt(strDueDate)
+        var dueDate: Int? = null
+        var dueHour: Int? = null
+        var strDueDate: String? = null
+        var strDueHour: String? = null
 
-        val strDueHour = editTextTime.text.toString().trim()
-        val dueHour= Converter.stringTimeToInt(strDueHour)
+        if(editTextDate.text.isNotEmpty()) {
+            strDueDate = editTextDate.text.toString().trim()
+            dueDate = Converter.stringDateToInt(strDueDate)
+        }
+
+        if(editTextTime.text.isNotEmpty()) {
+            strDueHour = editTextTime.text.toString().trim()
+            dueHour = Converter.stringTimeToInt(strDueHour)
+        }
 
         val title = editTextTitle.text.toString().trim()
         val note = editTextNote.text.toString().trim()

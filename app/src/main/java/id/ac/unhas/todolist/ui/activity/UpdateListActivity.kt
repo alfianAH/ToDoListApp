@@ -119,28 +119,39 @@ class UpdateListActivity : AppCompatActivity() {
     }
 
     private fun updateList(toDoList: ToDoList){
-        val current = ZonedDateTime.now()
-        val updatedDate = Converter.dateToInt(current)
-
-        val strDueDate = editTextDate.text.toString().trim()
-        val dueDate = Converter.stringDateToInt(strDueDate)
-
-        val strDueHour = editTextTime.text.toString().trim()
-        val dueHour= Converter.stringTimeToInt(strDueHour)
-
-        toDoList.updatedDate = updatedDate
-        toDoList.title = editTextTitle.text.toString().trim()
-        toDoList.dueDate = dueDate
-        toDoList.dueHour = dueHour
-        toDoList.strDueDate = strDueDate
-        toDoList.strDueHour = strDueHour
-        toDoList.note = editTextNote.text.toString().trim()
-        toDoList.isFinished = chkBoxIsFinished.isChecked
-
-        toDoListViewModel.updateList(toDoList)
         if(chkBoxIsFinished.isChecked){
             toDoListViewModel.deleteList(toDoList)
+        } else  {
+            val current = ZonedDateTime.now()
+            val updatedDate = Converter.dateToInt(current)
+
+            var dueDate: Int? = null
+            var dueHour: Int? = null
+            var strDueDate: String? = null
+            var strDueHour: String? = null
+
+            if(editTextDate.text.isNotEmpty()) {
+                strDueDate = editTextDate.text.toString().trim()
+                dueDate = Converter.stringDateToInt(strDueDate)
+            }
+
+            if(editTextTime.text.isNotEmpty()) {
+                strDueHour = editTextTime.text.toString().trim()
+                dueHour = Converter.stringTimeToInt(strDueHour)
+            }
+
+            toDoList.updatedDate = updatedDate
+            toDoList.title = editTextTitle.text.toString().trim()
+            toDoList.dueDate = dueDate
+            toDoList.dueHour = dueHour
+            toDoList.strDueDate = strDueDate
+            toDoList.strDueHour = strDueHour
+            toDoList.note = editTextNote.text.toString().trim()
+            toDoList.isFinished = chkBoxIsFinished.isChecked
+
+            toDoListViewModel.updateList(toDoList)
         }
+
         finish()
     }
 }
