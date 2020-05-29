@@ -30,6 +30,7 @@ class AddListActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_list)
+        // Change the menu title
         if(supportActionBar != null){
             supportActionBar?.title = "Add a Task"
         }
@@ -43,15 +44,15 @@ class AddListActivity : AppCompatActivity() {
         toDoListViewModel = ViewModelProvider(this).get(ToDoListViewModel::class.java)
 
         editTextDate.setOnClickListener{
-            setDueDate()
+            setDueDate() // Date Picker Dialog
         }
 
         editTextTime.setOnClickListener {
-            setDueTime()
+            setDueTime() // Time Picker Dialog
         }
 
         btnSave.setOnClickListener{
-            saveList()
+            saveList() // save list
         }
     }
 
@@ -61,6 +62,7 @@ class AddListActivity : AppCompatActivity() {
         return true
     }
 
+    // Set DatePickerDialog to simplify the input
     private fun setDueDate(){
         val date = calendar.get(Calendar.DAY_OF_MONTH)
         val month = calendar.get(Calendar.MONTH)
@@ -77,10 +79,12 @@ class AddListActivity : AppCompatActivity() {
         DatePickerDialog(this, dateListener, year, month, date).show()
     }
 
+    // Set TimePickerDialog to simplify the input
     private fun setDueTime(){
         val hour = calendar.get(Calendar.HOUR_OF_DAY)
         val minute = calendar.get(Calendar.MINUTE)
 
+        // TimePickerDialog
         val timeSetListener = TimePickerDialog.OnTimeSetListener { timePicker, hour, minute ->
             calendar.set(Calendar.HOUR_OF_DAY, hour)
             calendar.set(Calendar.MINUTE, minute)
@@ -90,31 +94,36 @@ class AddListActivity : AppCompatActivity() {
         TimePickerDialog(this, timeSetListener, hour, minute, true).show()
     }
 
+    // Save List when button is clicked
     private fun saveList(){
+        // Get current time (UTC+8)
         val current = ZonedDateTime.now(ZoneId.of("+8"))
         val formatter = DateTimeFormatter.ofPattern("EEE, MMM dd, yyyy, HH:mm:ss")
 
-        val strCreatedDate = current.format(formatter)
-        val createdDate = Converter.dateToInt(current)
+        val strCreatedDate = current.format(formatter) // string of created date
+        val createdDate = Converter.dateToInt(current) // Integer of created date
 
         var dueDate: Int? = null
         var dueHour: Int? = null
-        var strDueDate: String? = null
-        var strDueHour: String? = null
+        var strDueDate: String? = ""
+        var strDueHour: String? = ""
 
+        // Check if there is text in edit text date
         if(editTextDate.text.isNotEmpty()) {
             strDueDate = editTextDate.text.toString().trim()
-            dueDate = Converter.stringDateToInt(strDueDate)
+            dueDate = Converter.stringDateToInt(strDueDate) // Convert it to int
         }
 
+        // Check if there is text in edit text time
         if(editTextTime.text.isNotEmpty()) {
             strDueHour = editTextTime.text.toString().trim()
-            dueHour = Converter.stringTimeToInt(strDueHour)
+            dueHour = Converter.stringTimeToInt(strDueHour) // Convert it to int
         }
 
         val title = editTextTitle.text.toString().trim()
         val note = editTextNote.text.toString().trim()
 
+        // Insert list
         toDoListViewModel.insertList(
             ToDoList(
                 createdDate = createdDate,

@@ -14,6 +14,7 @@ import id.ac.unhas.todolist.db.todolist.ToDoList
 import id.ac.unhas.todolist.ui.Converter
 import id.ac.unhas.todolist.ui.view_model.ToDoListViewModel
 import java.text.SimpleDateFormat
+import java.time.ZoneId
 import java.time.ZonedDateTime
 import java.util.*
 
@@ -25,7 +26,6 @@ class UpdateListActivity : AppCompatActivity() {
     private lateinit var btnUpdate: Button
     private lateinit var btnCancel: Button
     private lateinit var chkBoxIsFinished: CheckBox
-
     private lateinit var toDoListViewModel: ToDoListViewModel
     private lateinit var toDoList: ToDoList
     private var calendar = Calendar.getInstance()
@@ -41,6 +41,7 @@ class UpdateListActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_update_list)
+        // Change the menu title
         if(supportActionBar != null){
             supportActionBar?.title = "Update a Task"
         }
@@ -55,22 +56,22 @@ class UpdateListActivity : AppCompatActivity() {
         chkBoxIsFinished = findViewById(R.id.checkbox_is_finished)
         toDoListViewModel = ViewModelProvider(this).get(ToDoListViewModel::class.java)
 
-        getExtra()
+        getExtra() // Get data from MainActivity
 
         editTextDate.setOnClickListener{
-            setDueDate()
+            setDueDate() // Date Picker dialog
         }
 
         editTextTime.setOnClickListener {
-            setDueTime()
+            setDueTime() // Time picker dialog
         }
 
         btnUpdate.setOnClickListener{
-            updateList(toDoList)
+            updateList(toDoList) // update list
         }
 
         btnCancel.setOnClickListener{
-            finish()
+            finish() // Cancel back to home
         }
     }
 
@@ -80,6 +81,7 @@ class UpdateListActivity : AppCompatActivity() {
         return true
     }
 
+    // Get Data from MainActivity
     private fun getExtra(){
         toDoList = intent.getParcelableExtra("EXTRA_LIST")!!
         editTextTitle.setText(intent.getStringExtra(EXTRA_TITLE_UPDATE))
@@ -89,6 +91,7 @@ class UpdateListActivity : AppCompatActivity() {
         chkBoxIsFinished.isChecked = intent.getBooleanExtra(EXTRA_IS_FINISHED_UPDATE, false)
     }
 
+    // Set DatePickerDialog to simplify the input
     private fun setDueDate(){
         val date = calendar.get(Calendar.DAY_OF_MONTH)
         val month = calendar.get(Calendar.MONTH)
@@ -105,10 +108,12 @@ class UpdateListActivity : AppCompatActivity() {
         DatePickerDialog(this, dateListener, year, month, date).show()
     }
 
+    // Set TimePickerDialog to simplify the input
     private fun setDueTime(){
         val hour = calendar.get(Calendar.HOUR_OF_DAY)
         val minute = calendar.get(Calendar.MINUTE)
 
+        // TimePickerDialog
         val timeSetListener = TimePickerDialog.OnTimeSetListener { timePicker, hour, minute ->
             calendar.set(Calendar.HOUR_OF_DAY, hour)
             calendar.set(Calendar.MINUTE, minute)
@@ -118,28 +123,35 @@ class UpdateListActivity : AppCompatActivity() {
         TimePickerDialog(this, timeSetListener, hour, minute, true).show()
     }
 
+    // Update list when button is clicked
     private fun updateList(toDoList: ToDoList){
+        // if check box is checked, delete list
+        // else, update database
         if(chkBoxIsFinished.isChecked){
             toDoListViewModel.deleteList(toDoList)
         } else  {
-            val current = ZonedDateTime.now()
+            // Get current time (UTC+8)
+            val current = ZonedDateTime.now(ZoneId.of("+8"))
             val updatedDate = Converter.dateToInt(current)
 
             var dueDate: Int? = null
             var dueHour: Int? = null
-            var strDueDate: String? = null
-            var strDueHour: String? = null
+            var strDueDate: String? = ""
+            var strDueHour: String? = ""
 
+            // Check if there is text in edit text date
             if(editTextDate.text.isNotEmpty()) {
                 strDueDate = editTextDate.text.toString().trim()
-                dueDate = Converter.stringDateToInt(strDueDate)
+                dueDate = Converter.stringDateToInt(strDueDate) // Convert it to int
             }
 
+            // Check if there is text in edit text time
             if(editTextTime.text.isNotEmpty()) {
                 strDueHour = editTextTime.text.toString().trim()
-                dueHour = Converter.stringTimeToInt(strDueHour)
+                dueHour = Converter.stringTimeToInt(strDueHour) // Convert it to int
             }
 
+            // Set the value of database
             toDoList.updatedDate = updatedDate
             toDoList.title = editTextTitle.text.toString().trim()
             toDoList.dueDate = dueDate
@@ -149,6 +161,7 @@ class UpdateListActivity : AppCompatActivity() {
             toDoList.note = editTextNote.text.toString().trim()
             toDoList.isFinished = chkBoxIsFinished.isChecked
 
+            // Update the value
             toDoListViewModel.updateList(toDoList)
         }
 

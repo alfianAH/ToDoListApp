@@ -16,6 +16,7 @@ class ToDoListAdapter(private val context: Context?, private val listener: (ToDo
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ToDoListViewHolder {
         return ToDoListViewHolder(
+            // Get the item_list.xml to make it as Holder
             LayoutInflater.from(parent.context).inflate(
                 R.layout.item_list,
                 parent,
@@ -32,6 +33,7 @@ class ToDoListAdapter(private val context: Context?, private val listener: (ToDo
         }
     }
 
+    // Set Lists to send it to ViewModel
     fun setLists(lists: List<ToDoList>){
         this.toDoLists = lists
         notifyDataSetChanged()
@@ -41,6 +43,7 @@ class ToDoListAdapter(private val context: Context?, private val listener: (ToDo
 
 class ToDoListViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
     fun bindItem(context: Context, toDoList: ToDoList, listener: (ToDoList, Int) -> Unit){
+        // Set the text in item_list;xml
         itemView.item_title_list.text = toDoList.title
         itemView.item_due_time.text = "${toDoList.strDueDate}, ${toDoList.strDueHour}"
         itemView.item_note.text = toDoList.note
